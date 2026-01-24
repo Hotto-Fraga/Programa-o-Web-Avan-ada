@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diferenças entre VAR, LET e CONST</title>
+    <style>
+      body {
+        font-family: "Courier New", monospace;
+        background: #1e1e1e;
+        color: #d4d4d4;
+        padding: 20px;
+        margin: 0;
+      }
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: #252526;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      }
+      h1 {
+        color: #4ec9b0;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .info {
+        background: #2d2d30;
+        padding: 20px;
+        border-left: 4px solid #007acc;
+        margin-bottom: 20px;
+        border-radius: 5px;
+      }
+      .info h2 {
+        color: #4fc1ff;
+        margin-top: 0;
+      }
+      .info p {
+        margin: 10px 0;
+        line-height: 1.6;
+      }
+      .code-example {
+        background: #1e1e1e;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 10px 0;
+        border-left: 3px solid #4ec9b0;
+      }
+      .keyword {
+        color: #569cd6;
+        font-weight: bold;
+      }
+      .console-note {
+        background: #f0ad4e;
+        color: #1e1e1e;
+        padding: 15px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🔍 Diferenças entre VAR, LET e CONST</h1>
+
+      <div class="console-note">
+        ⚠️ Abra o Console do Navegador (F12) para ver os resultados do programa!
+      </div>
+
+      <div class="info">
+        <h2>1. Hoisting com VAR e LET</h2>
+        <p>
+          <span class="keyword">var</span>: Sofre hoisting - pode ser acessada
+          antes da declaração (retorna undefined)
+        </p>
+        <p>
+          <span class="keyword">let</span>: Não pode ser acessada antes da
+          declaração (Temporal Dead Zone - erro ReferenceError)
+        </p>
+        <div class="code-example">
+          console.log(variavelVar); // undefined<br />
+          console.log(variavelLet); // ReferenceError<br />
+          var variavelVar = "teste";<br />
+          let variavelLet = "teste";
+        </div>
+      </div>
+
+      <div class="info">
+        <h2>2. Imutabilidade de CONST</h2>
+        <p>
+          <span class="keyword">const</span>: Não pode ser reatribuída (valor
+          primitivo é imutável)
+        </p>
+        <p>
+          <span class="keyword">const</span> com objetos/arrays: Pode modificar
+          propriedades/elementos, mas não pode substituir o objeto/array
+          completo
+        </p>
+        <div class="code-example">
+          const numero = 42;<br />
+          numero = 100; // ❌ Erro!<br />
+          <br />
+          const array = [1, 2, 3];<br />
+          array.push(4); // ✅ OK!<br />
+          array = [5, 6]; // ❌ Erro!
+        </div>
+      </div>
+
+      <div class="info">
+        <h2>3. Diferença de Âmbito (Scope)</h2>
+        <p>
+          <span class="keyword">var</span>: Escopo de função - variável
+          acessível fora do bloco
+        </p>
+        <p>
+          <span class="keyword">let</span>: Escopo de bloco - variável NÃO
+          acessível fora do bloco
+        </p>
+        <div class="code-example">
+          for (var i = 0; i < 3; i++) { }<br />
+          console.log(i); // ✅ 3 (acessível)<br />
+          <br />
+          for (let j = 0; j < 3; j++) { }<br />
+          console.log(j); // ❌ ReferenceError
+        </div>
+      </div>
+
+      <div class="info">
+        <h2>📋 Resumo</h2>
+        <p><strong>Use VAR:</strong> Raramente (código legado)</p>
+        <p><strong>Use LET:</strong> Quando o valor vai mudar</p>
+        <p><strong>Use CONST:</strong> Por padrão (melhor prática moderna)</p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

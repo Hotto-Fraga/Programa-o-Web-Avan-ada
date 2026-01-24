@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spread Operator e Rest Parameters</title>
+  </head>
+  <body>
+    <h1>Prática: Spread Operator e Rest Parameters</h1>
+
+    <h2>Funções Implementadas:</h2>
+
+    <h3>1. Spread em Arrays - unirListas()</h3>
+    <p>
+      Aceita dois arrays e retorna um novo array contendo todos os elementos.
+    </p>
+    <pre>
+const frutas = ["Maçã", "Banana"];
+const vegetais = ["Cenoura", "Brócolis"];
+const todos = unirListas(frutas, vegetais);
+// Resultado: ["Maçã", "Banana", "Cenoura", "Brócolis"]
+  </pre
+    >
+
+    <h3>2. Spread em Objetos - atualizarPessoa()</h3>
+    <p>Combina propriedades de dois objetos, retornando um novo objeto.</p>
+    <pre>
+const pessoa = { nome: "João", idade: 30 };
+const atualizacoes = { idade: 31, profissao: "Dev" };
+const atualizada = atualizarPessoa(pessoa, atualizacoes);
+// Resultado: { nome: "João", idade: 31, profissao: "Dev" }
+  </pre
+    >
+
+    <h3>3. Rest Parameters - mediaNotas()</h3>
+    <p>Aceita número variável de notas e retorna a média.</p>
+    <pre>
+const media = mediaNotas(8, 7, 9, 10);
+// Resultado: 8.5
+  </pre
+    >
+
+    <h3>4. Combinação - exibirResumo()</h3>
+    <p>Exibe um título seguido de todas as informações fornecidas.</p>
+    <pre>
+exibirResumo("Produto", "Nome: Laptop", "Preço: €899", "Stock: Sim");
+// Exibe no console:
+// === Produto ===
+// - Nome: Laptop
+// - Preço: €899
+// - Stock: Sim
+  </pre
+    >
+
+    <hr />
+
+    <h2>Instruções:</h2>
+    <p>
+      <strong>Abra o Console (F12)</strong> para ver todas as demonstrações.
+    </p>
+
+    <hr />
+
+    <h2>Testes Interativos:</h2>
+
+    <h3>Teste 1: Unir Listas</h3>
+    <p>
+      Lista 1:
+      <input
+        type="text"
+        id="lista1"
+        value="A,B,C"
+        placeholder="Digite valores separados por vírgula"
+      />
+    </p>
+    <p>
+      Lista 2:
+      <input
+        type="text"
+        id="lista2"
+        value="D,E,F"
+        placeholder="Digite valores separados por vírgula"
+      />
+    </p>
+    <button onclick="testarUnirListas()">Unir Listas</button>
+
+    <h3>Teste 2: Atualizar Pessoa</h3>
+    <p>Nome: <input type="text" id="nome" value="Maria" /></p>
+    <p>Idade: <input type="number" id="idade" value="25" /></p>
+    <p>
+      Nova Profissão: <input type="text" id="profissao" value="Engenheira" />
+    </p>
+    <button onclick="testarAtualizarPessoa()">Atualizar Pessoa</button>
+
+    <h3>Teste 3: Calcular Média</h3>
+    <p>
+      Notas:
+      <input
+        type="text"
+        id="notas"
+        value="7,8,9,6,10"
+        placeholder="Digite notas separadas por vírgula"
+      />
+    </p>
+    <button onclick="testarMediaNotas()">Calcular Média</button>
+
+    <h3>Teste 4: Exibir Resumo</h3>
+    <p>Título: <input type="text" id="titulo" value="Meu Resumo" /></p>
+    <p>Informação 1: <input type="text" id="info1" value="Item 1" /></p>
+    <p>Informação 2: <input type="text" id="info2" value="Item 2" /></p>
+    <p>Informação 3: <input type="text" id="info3" value="Item 3" /></p>
+    <button onclick="testarExibirResumo()">Exibir Resumo</button>
+
+    <hr />
+
+    <div id="resultado"></div>
+
+    <script src="app.js"></script>
+    <script>
+      function testarUnirListas() {
+        const texto1 = document.getElementById("lista1").value;
+        const texto2 = document.getElementById("lista2").value;
+
+        const array1 = texto1.split(",").map((item) => item.trim());
+        const array2 = texto2.split(",").map((item) => item.trim());
+
+        const resultado = unirListas(array1, array2);
+
+        console.log("\n--- TESTE: Unir Listas ---");
+        console.log("Array 1:", array1);
+        console.log("Array 2:", array2);
+        console.log("Resultado:", resultado);
+
+        document.getElementById("resultado").innerHTML =
+          "<h3>Resultado: Unir Listas</h3>" +
+          "<p><strong>Array 1:</strong> [" +
+          array1.join(", ") +
+          "]</p>" +
+          "<p><strong>Array 2:</strong> [" +
+          array2.join(", ") +
+          "]</p>" +
+          "<p><strong>Resultado:</strong> [" +
+          resultado.join(", ") +
+          "]</p>";
+      }
+
+      function testarAtualizarPessoa() {
+        const nome = document.getElementById("nome").value;
+        const idade = parseInt(document.getElementById("idade").value);
+        const profissao = document.getElementById("profissao").value;
+
+        const pessoaOriginal = { nome: nome, idade: idade };
+        const novasProps = { profissao: profissao, ativo: true };
+
+        const resultado = atualizarPessoa(pessoaOriginal, novasProps);
+
+        console.log("\n--- TESTE: Atualizar Pessoa ---");
+        console.log("Pessoa original:", pessoaOriginal);
+        console.log("Novas propriedades:", novasProps);
+        console.log("Resultado:", resultado);
+
+        document.getElementById("resultado").innerHTML =
+          "<h3>Resultado: Atualizar Pessoa</h3>" +
+          "<p><strong>Original:</strong> " +
+          JSON.stringify(pessoaOriginal) +
+          "</p>" +
+          "<p><strong>Novas Props:</strong> " +
+          JSON.stringify(novasProps) +
+          "</p>" +
+          "<p><strong>Resultado:</strong> " +
+          JSON.stringify(resultado) +
+          "</p>";
+      }
+
+      function testarMediaNotas() {
+        const texto = document.getElementById("notas").value;
+        const notasArray = texto.split(",").map((n) => parseFloat(n.trim()));
+
+        const resultado = mediaNotas(...notasArray);
+
+        console.log("\n--- TESTE: Média de Notas ---");
+        console.log("Notas:", notasArray);
+        console.log("Média:", resultado.toFixed(2));
+
+        document.getElementById("resultado").innerHTML =
+          "<h3>Resultado: Média de Notas</h3>" +
+          "<p><strong>Notas:</strong> [" +
+          notasArray.join(", ") +
+          "]</p>" +
+          "<p><strong>Média:</strong> " +
+          resultado.toFixed(2) +
+          "</p>";
+      }
+
+      function testarExibirResumo() {
+        const titulo = document.getElementById("titulo").value;
+        const info1 = document.getElementById("info1").value;
+        const info2 = document.getElementById("info2").value;
+        const info3 = document.getElementById("info3").value;
+
+        console.log("\n--- TESTE: Exibir Resumo ---");
+        exibirResumo(titulo, info1, info2, info3);
+
+        document.getElementById("resultado").innerHTML =
+          "<h3>Resultado: Exibir Resumo</h3>" +
+          "<p>Verifique o console para ver o resumo formatado!</p>" +
+          "<pre>" +
+          "=== " +
+          titulo +
+          " ===\n" +
+          "- " +
+          info1 +
+          "\n" +
+          "- " +
+          info2 +
+          "\n" +
+          "- " +
+          info3 +
+          "</pre>";
+      }
+    </script>
+  </body>
+</html>

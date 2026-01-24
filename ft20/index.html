@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FT20!</title>
+  </head>
+  <body>
+    <h1>Informações do carro:</h1>
+  </body>
+
+  <script>
+    class Carro {
+      constructor(Brand, Model, ReleaseYear, Klmts) {
+        this.Brand = "Opel";
+        this.Model = "Astra";
+        this.ReleaseYear = "2024";
+        this.Klmts = 1000;
+      }
+    }
+    const car = new Carro();
+    document.body.innerHTML += `<p>Brand: ${car.Brand}</p>
+    <p>Model: ${car.Model}</p>
+    <p>Release Year: ${car.ReleaseYear}</p>
+    <p>Kilometers: ${car.Klmts}</p>`;
+  </script>
+</html>

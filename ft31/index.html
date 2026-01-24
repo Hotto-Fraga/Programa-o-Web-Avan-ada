@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Análise de Vendas</title>
+  </head>
+  <body>
+    <h1>Sistema de Análise de Vendas</h1>
+
+    <h2>Contexto:</h2>
+    <p>Uma empresa quer analisar os dados de vendas dos seus produtos.</p>
+
+    <h2>Funções Implementadas:</h2>
+    <ol>
+      <li>
+        <strong>calcularTotalProduto(nomeProduto, vendas):</strong> Calcula o
+        total de vendas de um produto específico
+      </li>
+      <li>
+        <strong>calcularMediaVendas(vendas):</strong> Calcula a média de vendas
+        de todos os produtos
+      </li>
+      <li>
+        <strong>produtoMaiorVenda(vendas):</strong> Encontra o produto com a
+        maior venda individual
+      </li>
+    </ol>
+
+    <h2>Estrutura dos Dados:</h2>
+    <pre>
+{
+  produto: "Nome do Produto",
+  valor: 100.00,       // valor da venda
+  quantidade: 2        // quantidade vendida
+}
+  </pre
+    >
+
+    <h2>Instruções:</h2>
+    <p>
+      <strong>Abra o Console (F12)</strong> para ver a análise completa das
+      vendas.
+    </p>
+
+    <hr />
+
+    <h2>Teste Interativo:</h2>
+
+    <h3>Vendas Registradas:</h3>
+    <div id="lista-vendas"></div>
+
+    <h3>Consultas:</h3>
+    <button onclick="consultarProduto()">Consultar Total por Produto</button>
+    <button onclick="mostrarMedia()">Mostrar Média de Vendas</button>
+    <button onclick="mostrarMaiorVenda()">
+      Mostrar Produto com Maior Venda
+    </button>
+    <button onclick="mostrarResumo()">Mostrar Resumo Completo</button>
+
+    <div id="resultado"></div>
+
+    <script src="script.js"></script>
+    <script>
+      // Exibir lista de vendas na página
+      function exibirVendas() {
+        let html = "<ul>";
+        for (let i = 0; i < vendas.length; i++) {
+          const v = vendas[i];
+          const total = v.valor * v.quantidade;
+          html +=
+            "<li>" +
+            v.produto +
+            " - €" +
+            v.valor +
+            " x " +
+            v.quantidade +
+            " = <strong>€" +
+            total.toFixed(2) +
+            "</strong></li>";
+        }
+        html += "</ul>";
+        document.getElementById("lista-vendas").innerHTML = html;
+      }
+
+      function consultarProduto() {
+        const nome = prompt("Digite o nome do produto:");
+        if (nome) {
+          const total = calcularTotalProduto(nome, vendas);
+          console.log("Total de vendas de " + nome + ": €" + total.toFixed(2));
+
+          document.getElementById("resultado").innerHTML =
+            "<h3>Resultado:</h3>" +
+            "<p><strong>Produto:</strong> " +
+            nome +
+            "</p>" +
+            "<p><strong>Total de Vendas:</strong> €" +
+            total.toFixed(2) +
+            "</p>";
+        }
+      }
+
+      function mostrarMedia() {
+        const media = calcularMediaVendas(vendas);
+        console.log("Média de vendas: €" + media.toFixed(2));
+
+        document.getElementById("resultado").innerHTML =
+          "<h3>Resultado:</h3>" +
+          "<p><strong>Média de Vendas:</strong> €" +
+          media.toFixed(2) +
+          "</p>" +
+          "<p>Total de vendas: " +
+          vendas.length +
+          "</p>";
+      }
+
+      function mostrarMaiorVenda() {
+        const produto = produtoMaiorVenda(vendas);
+
+        // Encontrar a venda específica
+        let maiorValor = 0;
+        for (let i = 0; i < vendas.length; i++) {
+          const valorVenda = vendas[i].valor * vendas[i].quantidade;
+          if (vendas[i].produto === produto && valorVenda > maiorValor) {
+            maiorValor = valorVenda;
+          }
+        }
+
+        console.log(
+          "Produto com maior venda: " +
+            produto +
+            " (€" +
+            maiorValor.toFixed(2) +
+            ")",
+        );
+
+        document.getElementById("resultado").innerHTML =
+          "<h3>Resultado:</h3>" +
+          "<p><strong>Produto com Maior Venda Individual:</strong> " +
+          produto +
+          "</p>" +
+          "<p><strong>Valor da Venda:</strong> €" +
+          maiorValor.toFixed(2) +
+          "</p>";
+      }
+
+      function mostrarResumo() {
+        // Coletar produtos únicos
+        const produtos = [];
+        for (let i = 0; i < vendas.length; i++) {
+          if (produtos.indexOf(vendas[i].produto) === -1) {
+            produtos.push(vendas[i].produto);
+          }
+        }
+
+        let html = "<h3>Resumo Completo:</h3>";
+        html += "<h4>Total por Produto:</h4><ul>";
+
+        for (let i = 0; i < produtos.length; i++) {
+          const total = calcularTotalProduto(produtos[i], vendas);
+          html +=
+            "<li><strong>" +
+            produtos[i] +
+            ":</strong> €" +
+            total.toFixed(2) +
+            "</li>";
+        }
+
+        html += "</ul>";
+
+        const media = calcularMediaVendas(vendas);
+        html += "<h4>Média de Vendas:</h4>";
+        html += "<p>€" + media.toFixed(2) + "</p>";
+
+        const produtoTop = produtoMaiorVenda(vendas);
+        html += "<h4>Produto com Maior Venda:</h4>";
+        html += "<p>" + produtoTop + "</p>";
+
+        document.getElementById("resultado").innerHTML = html;
+
+        console.log("Resumo completo exibido na página");
+      }
+
+      // Exibir vendas ao carregar a página
+      exibirVendas();
+    </script>
+  </body>
+</html>

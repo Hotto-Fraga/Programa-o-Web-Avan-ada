@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulário de Apresentação!</title>
+  </head>
+  <body>
+    <div id="formulario-apresentacao"></div>
+    <h1>Formulário de Apresentação!!</h1>
+    <div id="name">
+      <p>Nome:</p>
+      <input type="text" id="input-name" placeholder="Digite seu nome" />
+    </div>
+    <div id="age">
+      <p>Idade:</p>
+      <input type="text" id="input-idade" placeholder="Digite sua Idade" />
+    </div>
+    <button id="enviar" type="submit">Enviar</button>
+
+    <script>
+      // Renderizar string
+      document.getElementById("enviar").onclick = function () {
+        const displayName = document.getElementById("input-name").value;
+        const displayAge = document.getElementById("input-idade").value;
+        document.getElementById("formulario-apresentacao").innerText =
+          `Olá ${displayName}! Tu tens ${displayAge} anos.`;
+      };
+    </script>
+  </body>
+</html>

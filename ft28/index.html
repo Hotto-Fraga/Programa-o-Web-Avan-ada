@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Importação Dinâmica de Módulo</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+      .container {
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        text-align: center;
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+      button {
+        padding: 15px 30px;
+        font-size: 18px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      button:hover {
+        background: #5568d3;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+      button:active {
+        transform: translateY(0);
+      }
+      .info {
+        margin-top: 20px;
+        padding: 15px;
+        background: #f0f0f0;
+        border-radius: 5px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Importação Dinâmica de Módulo</h1>
+      <p>Clique no botão para carregar o módulo dinamicamente</p>
+      <button id="loadModule">Carregar Módulo</button>
+      <div class="info">
+        <strong>Instruções:</strong><br />
+        Abra o console (F12) e clique no botão.<br />
+        O módulo será carregado apenas após o clique!
+      </div>
+    </div>
+
+    <script>
+      // Adicionar evento ao botão
+      document
+        .getElementById("loadModule")
+        .addEventListener("click", async () => {
+          try {
+            console.log("⏳ Carregando módulo...");
+
+            // Importação dinâmica do módulo
+            const module = await import("./message.js");
+
+            console.log("✅ Módulo carregado!");
+
+            // Chamar a função exportada pelo módulo
+            module.displayMessage();
+          } catch (error) {
+            console.error("❌ Erro ao carregar o módulo:", error);
+          }
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conversão de Tipos em JS!</title>
+  </head>
+  <body>
+    <div id="conversão"></div>
+        <h1>Conversão de Tipos em JS!</h1>
+            <input type ="text" id="input-value" placeholder="Digite um valor" />
+            <button id="convert-button">Converter</button>
+    </div>
+        <div id="results"></div>
+            <h3>Resultados da Conversão:</h3>
+            <ul>
+                <li id="to-number"></li>
+                <li id="to-string"></li>
+                <li id="to-boolean"></li>
+            </ul>
+            </div>
+    <script src="script.js"></script>
+    <script>
+    // Renderizar string
+    document.getElementById("convert-button").onclick = function() {
+        const inputValue = document.getElementById("input-value").value;
+
+        // Conversão para número
+        const toNumber = Number(inputValue);
+        document.getElementById("to-number").innerText = `Número: ${toNumber} (Tipo: ${typeof toNumber})`;
+
+        // Conversão para string
+        const toString = String(inputValue);
+        document.getElementById("to-string").innerText = `String: "${toString}" (Tipo: ${typeof toString})`;
+
+        // Conversão para booleano
+        const toBoolean = Boolean(inputValue);
+        document.getElementById("to-boolean").innerText = `Booleano: ${toBoolean} (Tipo: ${typeof toBoolean})`;
+    };
+    </script>  
+</body>
+</html>

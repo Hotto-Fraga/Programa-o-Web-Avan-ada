@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Shop</title>
+  </head>
+  <body>
+    <h1>🛒 Mini Shop</h1>
+
+    <section>
+      <h2>Adicionar Produto</h2>
+      <input type="text" id="product-name" placeholder="Nome do produto" />
+      <input type="number" id="product-price" placeholder="Preço" step="0.01" />
+      <button id="add-product">Adicionar Produto</button>
+    </section>
+
+    <section>
+      <h2>Produtos Disponíveis</h2>
+      <div id="product-list"></div>
+    </section>
+
+    <section>
+      <h2>Carrinho de Compras</h2>
+      <div id="cart"></div>
+      <div class="total" id="total"></div>
+      <button id="clear-cart">Limpar Carrinho</button>
+    </section>
+
+    <script src="products.js"></script>
+    <script src="cart.js"></script>
+    <script src="main.js"></script>
+    <script>
+      // Renderizar produtos
+      function renderProducts() {
+        const products = getProducts();
+        const productList = document.getElementById("product-list");
+
+        if (products.length === 0) {
+          productList.innerHTML = "<p>Nenhum produto disponível</p>";
+          return;
+        }
+
+        productList.innerHTML = products
+          .map(
+            (product, index) => `
+          <div class="product-item">
+            <span>${product.name} - $${product.price}</span>
+            <button onclick="addToCart(${JSON.stringify(product).replace(/"/g, "&quot;")}); renderCart()">
+              Adicionar ao Carrinho
+            </button>
+          </div>
+        `,
+          )
+          .join("");
+      }
+
+      // Renderizar carrinho
+      function renderCart() {
+        const cart = getCart();
+        const cartDiv = document.getElementById("cart");
+        const totalDiv = document.getElementById("total");
+
+        if (cart.length === 0) {
+          cartDiv.innerHTML = "<p>Carrinho vazio</p>";
+          totalDiv.innerHTML = "";
+          return;
+        }
+
+        cartDiv.innerHTML = cart
+          .map(
+            (item, index) => `
+          <div class="cart-item">
+            <span>${item.name} - $${item.price}</span>
+          </div>
+        `,
+          )
+          .join("");
+
+        const total = cart.reduce(
+          (sum, item) => sum + parseFloat(item.price),
+          0,
+        );
+        totalDiv.innerHTML = `Total: $${total.toFixed(2)}`;
+      }
+
+      // Adicionar produto
+      document.getElementById("add-product").addEventListener("click", () => {
+        const name = document.getElementById("product-name").value;
+        const price = parseFloat(
+          document.getElementById("product-price").value,
+        );
+
+        if (name && price) {
+          addProducts({ name, price });
+          document.getElementById("product-name").value = "";
+          document.getElementById("product-price").value = "";
+          renderProducts();
+        } else {
+          alert("Preencha nome e preço");
+        }
+      });
+
+      // Limpar carrinho
+      document.getElementById("clear-cart").addEventListener("click", () => {
+        clearCart();
+        renderCart();
+      });
+
+      // Inicializar
+      renderProducts();
+      renderCart();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestor de Produtos</title>
+  </head>
+  <body>
+    <h1>Gestor de Produtos</h1>
+
+    <h2>Funcionalidades Implementadas:</h2>
+    <ol>
+      <li>
+        <strong>Adicionar Produto:</strong> Cria objeto com nome, preço e stock
+      </li>
+      <li>
+        <strong>Calcular Stock Total:</strong> Soma o stock de todos os produtos
+      </li>
+      <li>
+        <strong>Procurar Produto por Nome:</strong> Encontra produto no array
+        pelo nome
+      </li>
+      <li>
+        <strong>Calcular Desconto:</strong> Aplica percentual de desconto ao
+        preço
+      </li>
+    </ol>
+
+    <h2>Instruções:</h2>
+    <p>Abra o Console do Navegador (F12) para ver os resultados das funções.</p>
+
+    <h2>Exemplo de Uso:</h2>
+    <pre>
+const produto = adicionarProduto("Laptop", 1200, 15);
+// Retorna: { nome: "Laptop", preco: 1200, stock: 15 }
+
+const total = calcularStockTotal([produto1, produto2, produto3]);
+// Retorna: soma de todos os stocks
+
+const produto = procurarProdutoPorNome(produtos, "Teclado");
+// Retorna: objeto do produto ou null
+
+const novoPreco = calcularDesconto(1200, 10);
+// Retorna: 1080 (10% de desconto em 1200)
+  </pre
+    >
+
+    <h2>Teste Interativo:</h2>
+    <button onclick="testarAdicionar()">Adicionar Novo Produto</button>
+    <button onclick="testarProcurar()">Procurar Produto</button>
+    <button onclick="testarDesconto()">Calcular Desconto</button>
+    <button onclick="mostrarCatalogo()">Mostrar Catálogo Completo</button>
+
+    <div id="resultado"></div>
+
+    <script src="script.js"></script>
+    <script>
+      // Funções para testes interativos
+      function testarAdicionar() {
+        const nome = prompt("Nome do produto:");
+        const preco = parseFloat(prompt("Preço:"));
+        const stock = parseInt(prompt("Quantidade em stock:"));
+
+        if (nome && !isNaN(preco) && !isNaN(stock)) {
+          const produto = adicionarProduto(nome, preco, stock);
+          catalogoProdutos.push(produto);
+          console.log("Produto adicionado:", produto);
+          document.getElementById("resultado").innerHTML =
+            "<p><strong>Produto adicionado com sucesso!</strong><br>" +
+            "Nome: " +
+            produto.nome +
+            "<br>" +
+            "Preço: €" +
+            produto.preco +
+            "<br>" +
+            "Stock: " +
+            produto.stock +
+            "</p>";
+        } else {
+          alert("Dados inválidos!");
+        }
+      }
+
+      function testarProcurar() {
+        const nome = prompt("Nome do produto a procurar:");
+        if (nome) {
+          const produto = procurarProdutoPorNome(catalogoProdutos, nome);
+          console.log("Resultado da busca:", produto);
+
+          if (produto) {
+            document.getElementById("resultado").innerHTML =
+              "<p><strong>Produto encontrado!</strong><br>" +
+              "Nome: " +
+              produto.nome +
+              "<br>" +
+              "Preço: €" +
+              produto.preco +
+              "<br>" +
+              "Stock: " +
+              produto.stock +
+              "</p>";
+          } else {
+            document.getElementById("resultado").innerHTML =
+              "<p><strong>Produto não encontrado!</strong></p>";
+          }
+        }
+      }
+
+      function testarDesconto() {
+        const preco = parseFloat(prompt("Preço original:"));
+        const desconto = parseFloat(prompt("Percentual de desconto (%):"));
+
+        if (!isNaN(preco) && !isNaN(desconto)) {
+          const novoPreco = calcularDesconto(preco, desconto);
+          console.log("Preço com desconto:", novoPreco);
+
+          document.getElementById("resultado").innerHTML =
+            "<p><strong>Cálculo de Desconto:</strong><br>" +
+            "Preço original: €" +
+            preco.toFixed(2) +
+            "<br>" +
+            "Desconto: " +
+            desconto +
+            "%<br>" +
+            "Preço final: €" +
+            novoPreco.toFixed(2) +
+            "</p>";
+        } else {
+          alert("Dados inválidos!");
+        }
+      }
+
+      function mostrarCatalogo() {
+        const total = calcularStockTotal(catalogoProdutos);
+        let html = "<h3>Catálogo de Produtos</h3>";
+        html += "<ul>";
+
+        for (let i = 0; i < catalogoProdutos.length; i++) {
+          const p = catalogoProdutos[i];
+          html +=
+            "<li>" +
+            p.nome +
+            " - €" +
+            p.preco +
+            " - Stock: " +
+            p.stock +
+            "</li>";
+        }
+
+        html += "</ul>";
+        html += "<p><strong>Stock Total: " + total + " unidades</strong></p>";
+
+        document.getElementById("resultado").innerHTML = html;
+        console.log("Catálogo completo exibido. Stock total:", total);
+      }
+    </script>
+  </body>
+</html>

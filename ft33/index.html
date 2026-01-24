@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrinho de Compras</title>
+  </head>
+  <body>
+    <h1>Carrinho de Compras</h1>
+
+    <h2>Adicionar Produto</h2>
+    <form id="addProductForm">
+      <label for="productName">Nome:</label>
+      <input type="text" id="productName" required />
+
+      <label for="productPrice">Preço (€):</label>
+      <input type="number" id="productPrice" step="0.01" min="0" required />
+
+      <label for="productQuantity">Quantidade:</label>
+      <input type="number" id="productQuantity" min="1" value="1" required />
+
+      <button type="submit">Adicionar ao Carrinho</button>
+    </form>
+
+    <h2>Carrinho</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Preço (€)</th>
+          <th>Quantidade</th>
+          <th>Subtotal (€)</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="cartTableBody"></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3"><strong>Total:</strong></td>
+          <td colspan="2"><strong id="totalPrice">0.00 €</strong></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <script src="script.js"></script>
+  </body>
+</html>
